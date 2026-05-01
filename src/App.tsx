@@ -120,18 +120,20 @@ export default function App() {
   const filteredProducts = PRODUCTS.filter(p => p.category === currentCategory);
 
   return (
-    <div className="min-h-screen bg-rich-black text-white selection:bg-gold selection:text-black font-sans leading-relaxed luxury-bg">
+    <div className={`min-h-screen transition-all duration-700 ${currentCategory === "Aesthetic Outfits" ? "bg-zinc-50 text-black" : "bg-rich-black text-white"} selection:bg-gold selection:text-black font-sans leading-relaxed luxury-bg`}>
       {/* Dynamic Header */}
       <header 
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 md:px-12 px-6 flex justify-between items-center ${
-          isScrolled ? "bg-rich-black/95 backdrop-blur-3xl border-b border-white/10 py-4" : "bg-transparent py-8"
+          isScrolled 
+            ? (currentCategory === "Aesthetic Outfits" ? "bg-white/95 backdrop-blur-3xl border-b border-zinc-200 py-4 shadow-sm" : "bg-rich-black/95 backdrop-blur-3xl border-b border-white/10 py-4") 
+            : "bg-transparent py-8"
         }`}
       >
         <div className="flex items-center gap-10">
           <button onClick={() => setIsMenuOpen(true)} className="group relative">
-            <Menu className="w-7 h-7 hover:text-gold transition-colors" />
+            <Menu className={`w-7 h-7 transition-colors ${currentCategory === "Aesthetic Outfits" ? "text-black hover:text-gold" : "text-white hover:text-gold"}`} />
           </button>
-          <a href="#" className="font-display font-extrabold text-2xl tracking-[0.05em] text-white flex items-center gap-2">
+          <a href="#" className="font-display font-extrabold text-2xl tracking-[0.05em] flex items-center gap-2">
             HONEYSFASHION<span className="text-gold italic">.STORE</span>
           </a>
         </div>
@@ -238,7 +240,7 @@ export default function App() {
       </section>
 
       {/* Advantage Banner */}
-      <section className="bg-rich-black/50 backdrop-blur-md border-y border-white/5 py-16 px-6">
+      <section className={`transition-all duration-700 backdrop-blur-md border-y py-16 px-6 ${currentCategory === "Aesthetic Outfits" ? "bg-white/50 border-zinc-200" : "bg-rich-black/50 border-white/5"}`}>
         <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-12">
           {[
             { icon: Truck, title: "2-3 Days Shipping", desc: "Express delivery across the nation." },
@@ -247,25 +249,26 @@ export default function App() {
             { icon: Leaf, title: "Eco-Friendly Elite", desc: "Sustainably crafted luxury vibes." }
           ].map((item, i) => (
             <motion.div whileHover={{ y: -5 }} key={i} className="flex flex-col items-center text-center space-y-4">
-              <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 mb-2 hover:border-gold/50 transition-colors">
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border mb-2 transition-all duration-500 ${currentCategory === "Aesthetic Outfits" ? "bg-zinc-50 border-zinc-200 hover:border-gold" : "bg-white/5 border-white/10 hover:border-gold/50"}`}>
                 <item.icon className="w-7 h-7 text-gold" />
               </div>
-              <h4 className="text-[10px] font-black uppercase tracking-[0.2em]">{item.title}</h4>
-              <p className="text-[10px] text-zinc-500 font-bold max-w-[150px]">{item.desc}</p>
+              <h4 className={`text-[10px] font-black uppercase tracking-[0.2em] ${currentCategory === "Aesthetic Outfits" ? "text-black" : "text-white"}`}>{item.title}</h4>
+              <p className={`text-[10px] font-bold max-w-[150px] ${currentCategory === "Aesthetic Outfits" ? "text-zinc-400" : "text-zinc-500"}`}>{item.desc}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* Category Navigation Bar */}
-      <div className="sticky top-16 md:top-24 z-40 bg-rich-black/80 backdrop-blur-2xl border-b border-white/10 px-6">
+      <div className={`sticky top-16 md:top-24 z-40 backdrop-blur-2xl border-b transition-all duration-700 px-6 ${currentCategory === "Aesthetic Outfits" ? "bg-white/80 border-zinc-200" : "bg-rich-black/80 border-white/10"}`}>
         <div className="max-w-7xl mx-auto flex items-center justify-start md:justify-center gap-8 py-6 overflow-x-auto no-scrollbar">
           {CATEGORIES.map(cat => (
             <button 
               key={cat}
               onClick={() => setCurrentCategory(cat)}
               className={`whitespace-nowrap text-[9px] uppercase tracking-[0.3em] font-black px-8 py-3 rounded-full border transition-all duration-500 hover:scale-105 ${
-                currentCategory === cat ? "bg-gold border-gold text-black shadow-lg shadow-gold/20" : "border-white/10 text-zinc-500 hover:border-white/30"
+                currentCategory === cat ? "bg-gold border-gold text-black shadow-lg shadow-gold/20" : 
+                (currentCategory === "Aesthetic Outfits" ? "border-zinc-200 text-zinc-400 hover:border-zinc-400" : "border-white/10 text-zinc-500 hover:border-white/30")
               }`}
             >
               {cat}
@@ -279,10 +282,10 @@ export default function App() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
             <div>
-              <span className="text-gold font-display font-black text-[10px] tracking-[0.6em] uppercase block mb-6 italic underline decoration-gold/10 underline-offset-8">Signature Series</span>
-              <h2 className="text-4xl md:text-7xl font-display font-light italic">The <span className="font-black not-italic text-white">Full Collection</span></h2>
+              <span className={`font-display font-black text-[10px] tracking-[0.6em] uppercase block mb-6 italic underline decoration-gold/10 underline-offset-8 ${currentCategory === "Aesthetic Outfits" ? "text-zinc-400" : "text-gold"}`}>Signature Series</span>
+              <h2 className={`text-4xl md:text-7xl font-display font-light italic ${currentCategory === "Aesthetic Outfits" ? "text-black" : "text-white"}`}>The <span className={`font-black not-italic ${currentCategory === "Aesthetic Outfits" ? "text-black" : "text-white"}`}>{currentCategory} Collection</span></h2>
             </div>
-            <div className="text-zinc-500 uppercase tracking-widest text-[10px] font-bold">Exclusive Price: <span className="text-gold text-2xl font-black ml-2">₹999</span></div>
+            <div className={`uppercase tracking-widest text-[10px] font-bold ${currentCategory === "Aesthetic Outfits" ? "text-zinc-400" : "text-zinc-500"}`}>Exclusive Price: <span className="text-gold text-2xl font-black ml-2">₹999</span></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">
@@ -300,7 +303,7 @@ export default function App() {
                 className="group cursor-pointer perspective-1000"
                 onClick={() => handleBuyNow(product)}
               >
-                <div className="relative aspect-[1/1] overflow-hidden bg-white/5 rounded-3xl mb-10 border border-white/10 shadow-2xl backdrop-blur-sm transition-all duration-500 group-hover:shadow-gold/10 group-hover:border-gold/30">
+                <div className={`relative aspect-[1/1] overflow-hidden rounded-3xl mb-10 border transition-all duration-500 shadow-2xl backdrop-blur-sm ${currentCategory === "Aesthetic Outfits" ? "bg-white border-zinc-100 group-hover:shadow-zinc-200" : "bg-white/5 border-white/10 group-hover:shadow-gold/10 group-hover:border-gold/30"}`}>
                   <motion.div 
                     className="w-full h-full"
                     whileHover={{ rotateY: 15, rotateX: -5, scale: 1.05 }}
@@ -308,29 +311,29 @@ export default function App() {
                   >
                     <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover" />
                   </motion.div>
-                  <div className="absolute inset-0 bg-rich-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/50 italic">View Details</span>
+                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none ${currentCategory === "Aesthetic Outfits" ? "bg-zinc-100/20" : "bg-rich-black/20"}`}>
+                    <span className={`text-[10px] font-black uppercase tracking-[0.4em] italic ${currentCategory === "Aesthetic Outfits" ? "text-black/60" : "text-white/50"}`}>View Archive</span>
                   </div>
-                  <div className="absolute top-6 left-6 bg-rich-black/80 backdrop-blur-xl px-5 py-2 rounded-full border border-white/10 text-[9px] font-black uppercase tracking-[0.2em] italic">
+                  <div className={`absolute top-6 left-6 backdrop-blur-xl px-5 py-2 rounded-full border text-[9px] font-black uppercase tracking-[0.2em] italic ${currentCategory === "Aesthetic Outfits" ? "bg-white/80 border-zinc-200 text-black" : "bg-rich-black/80 border-white/10 text-white"}`}>
                     {product.brand}
                   </div>
                   <button 
                     onClick={(e) => { e.stopPropagation(); /* Future wishlist logic */ }}
-                    className="absolute top-6 right-6 p-3 bg-white/5 hover:bg-gold/20 rounded-full transition-colors group/heart border border-white/5"
+                    className={`absolute top-6 right-6 p-3 rounded-full transition-colors group/heart border ${currentCategory === "Aesthetic Outfits" ? "bg-zinc-50 border-zinc-100 hover:bg-gold/10" : "bg-white/5 border-white/5 hover:bg-gold/20"}`}
                   >
-                    <Heart className="w-5 h-5 text-zinc-500 group-hover/heart:text-gold" />
+                    <Heart className={`w-5 h-5 transition-colors ${currentCategory === "Aesthetic Outfits" ? "text-zinc-300 group-hover/heart:text-gold" : "text-zinc-500 group-hover/heart:text-gold"}`} />
                   </button>
                 </div>
                 <div className="flex justify-between items-start px-4">
                   <div className="flex-1">
-                    <h3 className="font-display font-bold text-2xl mb-2 italic tracking-tight">{product.name}</h3>
-                    <p className="text-zinc-500 text-[10px] uppercase tracking-[0.3em] font-black flex items-center gap-2">
-                       {product.category} <span className="w-1 h-1 bg-gold rounded-full" /> In Stock
+                    <h3 className={`font-display font-bold text-2xl mb-2 italic tracking-tight ${currentCategory === "Aesthetic Outfits" ? "text-black" : "text-white"}`}>{product.name}</h3>
+                    <p className={`text-[10px] uppercase tracking-[0.3em] font-black flex items-center gap-2 ${currentCategory === "Aesthetic Outfits" ? "text-zinc-400" : "text-zinc-500"}`}>
+                       Archive Entry <span className="w-1 h-1 bg-gold rounded-full" /> Verified
                     </p>
                   </div>
                   <div className="text-right">
-                    <span className="text-2xl font-black text-gold">₹999</span>
-                    <p className="text-[10px] text-zinc-600 line-through font-bold">₹4,999</p>
+                    <span className={`text-2xl font-black ${currentCategory === "Aesthetic Outfits" ? "text-black" : "text-gold"}`}>₹999</span>
+                    <p className={`text-[10px] line-through font-bold ${currentCategory === "Aesthetic Outfits" ? "text-zinc-300" : "text-zinc-600"}`}>₹4,999</p>
                   </div>
                 </div>
               </motion.div>
@@ -350,23 +353,23 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }} 
               animate={{ opacity: 1, scale: 1, y: 0 }} 
               exit={{ opacity: 0, scale: 0.9, y: 20 }} 
-              className="relative w-full max-w-6xl bg-rich-black border border-white/10 rounded-[2rem] md:rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-[0_0_150px_rgba(212,175,55,0.05)] my-4 md:my-0 md:max-h-[90vh]"
+              className="relative w-full max-w-6xl bg-white border border-zinc-200 rounded-[2rem] md:rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-[0_40px_100px_rgba(0,0,0,0.15)] my-4 md:my-0 md:max-h-[85vh]"
             >
               {isSuccess ? (
-                <div className="w-full py-20 md:py-32 px-8 md:px-16 text-center flex flex-col items-center justify-center bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] overflow-y-auto">
+                <div className="w-full py-20 md:py-32 px-8 md:px-16 text-center flex flex-col items-center justify-center bg-white overflow-y-auto">
                   <CheckCircle2 className="w-16 h-16 md:w-24 md:h-24 text-gold mb-8 md:mb-12 animate-bounce" />
-                  <h2 className="text-4xl md:text-7xl font-display font-black mb-6 md:mb-8 italic tracking-tighter text-white">ORDER SECURED.</h2>
-                  <p className="text-zinc-500 text-base md:text-xl max-w-xl mb-10 md:mb-16 leading-relaxed">Congrats <span className="text-white font-bold">{formData.name}</span>! Your <span className="text-gold font-bold">{selectedProduct.name}</span> has been secured. Our team will dispatch it today. Expect delivery in 2-3 days.</p>
-                  <button onClick={() => { setShowCheckout(false); setIsSuccess(false); setFormData({name: "", number: "", address: ""}); }} className="bg-white text-black px-12 md:px-16 py-4 md:py-5 rounded-full font-black uppercase tracking-widest transition-all hover:bg-gold hover:scale-105 active:scale-95 shadow-xl text-xs">Return To Store</button>
+                  <h2 className="text-4xl md:text-7xl font-display font-black mb-6 md:mb-8 italic tracking-tighter text-black">ORDER SECURED.</h2>
+                  <p className="text-zinc-500 text-base md:text-xl max-w-xl mb-10 md:mb-16 leading-relaxed uppercase tracking-widest font-black italic">Congrats <span className="text-black font-black">{formData.name}</span>! Your <span className="text-gold font-black">{selectedProduct.name}</span> has been secured. Our team will dispatch it today. Expect delivery in 2-3 days.</p>
+                  <button onClick={() => { setShowCheckout(false); setIsSuccess(false); setFormData({name: "", number: "", address: ""}); }} className="bg-black text-white px-12 md:px-16 py-4 md:py-5 rounded-full font-black uppercase tracking-widest transition-all hover:bg-gold hover:scale-105 active:scale-95 shadow-xl text-xs">Return To Store</button>
                 </div>
               ) : (
                 <div className="flex flex-col md:flex-row w-full overflow-hidden">
                   {/* Sidebar - Detailed Order Summary / Detail Gallery - ONLY SHOWN IN DETAIL STEP */}
                   {checkoutStep === "detail" && (
-                    <div className="w-full md:w-5/12 p-6 md:p-12 bg-charcoal/20 border-b md:border-b-0 md:border-r border-white/5 flex flex-col shadow-2xl overflow-y-auto md:max-h-full">
+                    <div className="w-full md:w-5/12 p-6 md:p-12 bg-zinc-50 border-b md:border-b-0 md:border-r border-zinc-100 flex flex-col shadow-inner overflow-y-auto md:max-h-full">
                       <div className="mb-6 md:mb-8">
-                        <span className="text-[10px] text-zinc-500 uppercase tracking-[0.4em] font-black italic block mb-4">
-                          Product View
+                        <span className="text-[10px] text-zinc-400 uppercase tracking-[0.4em] font-black italic block mb-4">
+                          Archive View
                         </span>
                         <div className="relative group/modal inline-block w-full">
                           <AnimatePresence mode="wait">
@@ -377,7 +380,7 @@ export default function App() {
                               exit={{ opacity: 0 }}
                               src={selectedProduct.images[activeGalleryIndex]} 
                               alt={selectedProduct.name} 
-                              className="w-full aspect-square object-cover rounded-3xl shadow-xl ring-1 ring-white/10" 
+                              className="w-full aspect-square object-cover rounded-3xl shadow-xl ring-1 ring-zinc-200" 
                             />
                           </AnimatePresence>
                         </div>
@@ -387,7 +390,7 @@ export default function App() {
                             <button 
                               key={i} 
                               onClick={() => setActiveGalleryIndex(i)}
-                              className={`w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all ${activeGalleryIndex === i ? "border-gold scale-105" : "border-white/5 opacity-50"}`}
+                              className={`w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all ${activeGalleryIndex === i ? "border-gold scale-105" : "border-zinc-100 opacity-50"}`}
                             >
                               <img src={img} className="w-full h-full object-cover" />
                             </button>
@@ -397,61 +400,61 @@ export default function App() {
 
                       <div className="space-y-6 flex-1">
                         <div>
-                          <h2 className="text-2xl font-display font-black tracking-tight mb-2">{selectedProduct.name}</h2>
-                          <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Premium Edition • {selectedProduct.category}</p>
+                          <h2 className="text-2xl font-display font-black tracking-tight mb-2 text-black">{selectedProduct.name}</h2>
+                          <p className="text-zinc-400 text-[10px] uppercase tracking-widest font-black italic">Archive Series • {selectedProduct.category}</p>
                         </div>
 
-                        <div className="pt-6 border-t border-white/5 space-y-4">
+                        <div className="pt-6 border-t border-zinc-100 space-y-4">
                           <div className="space-y-3">
-                            <p className="text-xs text-zinc-400 italic">"{selectedProduct.description}"</p>
+                            <p className="text-xs text-zinc-500 italic font-medium">"{selectedProduct.description}"</p>
                             <div className="flex flex-wrap gap-2">
                               {selectedProduct.specs.map((s, i) => (
-                                <span key={i} className="text-[8px] bg-white/5 border border-white/10 px-2 py-1 rounded-full text-zinc-500 uppercase tracking-widest">{s}</span>
+                                <span key={i} className="text-[8px] bg-zinc-100 border border-zinc-200 px-2 py-1 rounded-full text-zinc-600 uppercase tracking-widest font-black italic">{s}</span>
                               ))}
                             </div>
                           </div>
                           
-                          <div className="pt-6 border-t border-white/10 flex justify-between items-center text-xl font-display font-black">
-                            <span className="text-white">Total</span>
-                            <span className="text-gold">₹999</span>
+                          <div className="pt-6 border-t border-zinc-200 flex justify-between items-center text-xl font-display font-black italic">
+                            <span className="text-black">Subtotal</span>
+                            <span className="text-black">₹999</span>
                           </div>
                         </div>
                       </div>
 
-                      <div className="mt-8 p-4 bg-gold/5 rounded-2xl border border-gold/10">
-                        <div className="flex items-center gap-3 text-[9px] font-black text-gold uppercase tracking-[0.2em] italic">
-                          <ShieldCheck className="w-4 h-4" /> Secure Acquisition Protocol
+                      <div className="mt-8 p-4 bg-zinc-100 rounded-2xl border border-zinc-200">
+                        <div className="flex items-center gap-3 text-[9px] font-black text-black uppercase tracking-[0.2em] italic">
+                          <ShieldCheck className="w-4 h-4 text-gold" /> Authenticity Verified
                         </div>
                       </div>
                     </div>
                   )}
 
                   {/* Main Content Area */}
-                  <div className={`w-full ${checkoutStep === "detail" ? "md:w-7/12" : "md:w-full"} p-6 md:p-12 overflow-y-auto bg-rich-black flex flex-col`}>
+                  <div className={`w-full ${checkoutStep === "detail" ? "md:w-7/12" : "md:w-full"} p-6 md:p-12 overflow-y-auto bg-white flex flex-col`}>
                     <div className="flex justify-between items-start mb-8 md:mb-12">
                       <div className="space-y-4 md:space-y-6">
-                        <h3 className="text-xl md:text-2xl font-display font-black italic tracking-tighter">
-                          {checkoutStep === "detail" ? "SPECIFICATIONS" : "CHECKOUT"}
+                        <h3 className="text-xl md:text-2xl font-display font-black italic tracking-tighter text-black">
+                          {checkoutStep === "detail" ? "SPECIFICATIONS" : "ACQUISITION"}
                         </h3>
                         {/* Progress Stepper */}
                         <div className="flex items-center gap-2 md:gap-4 overflow-x-auto no-scrollbar">
-                          <div className={`flex items-center gap-2 text-[7px] md:text-[8px] uppercase tracking-[0.15em] font-black transition-all ${checkoutStep === "detail" ? "text-gold" : "text-zinc-600"}`}>
-                            <span className={`w-4 h-4 md:w-5 md:h-5 rounded-full border-2 flex items-center justify-center transition-all ${checkoutStep === "detail" ? "border-gold bg-gold/10" : "border-zinc-800"}`}>1</span>
-                            Detail
+                          <div className={`flex items-center gap-2 text-[7px] md:text-[8px] uppercase tracking-[0.15em] font-black transition-all ${checkoutStep === "detail" ? "text-gold" : "text-zinc-300"}`}>
+                            <span className={`w-4 h-4 md:w-5 md:h-5 rounded-full border-2 flex items-center justify-center transition-all ${checkoutStep === "detail" ? "border-gold bg-gold/10" : "border-zinc-200"}`}>1</span>
+                            Review
                           </div>
-                          <div className="w-4 md:w-8 h-[1px] bg-zinc-800" />
-                          <div className={`flex items-center gap-2 text-[7px] md:text-[8px] uppercase tracking-[0.15em] font-black transition-all ${checkoutStep === "shipping" ? "text-gold" : "text-zinc-600"}`}>
-                            <span className={`w-4 h-4 md:w-5 md:h-5 rounded-full border-2 flex items-center justify-center transition-all ${checkoutStep === "shipping" ? "border-gold bg-gold/10" : "border-zinc-800"}`}>2</span>
-                            Shipping
+                          <div className="w-4 md:w-8 h-[1px] bg-zinc-100" />
+                          <div className={`flex items-center gap-2 text-[7px] md:text-[8px] uppercase tracking-[0.15em] font-black transition-all ${checkoutStep === "shipping" ? "text-gold" : "text-zinc-300"}`}>
+                            <span className={`w-4 h-4 md:w-5 md:h-5 rounded-full border-2 flex items-center justify-center transition-all ${checkoutStep === "shipping" ? "border-gold bg-gold/10" : "border-zinc-200"}`}>2</span>
+                            Logistic
                           </div>
-                          <div className="w-4 md:w-8 h-[1px] bg-zinc-800" />
-                          <div className={`flex items-center gap-2 text-[7px] md:text-[8px] uppercase tracking-[0.15em] font-black transition-all ${checkoutStep === "payment" ? "text-gold" : "text-zinc-600"}`}>
-                            <span className={`w-4 h-4 md:w-5 md:h-5 rounded-full border-2 flex items-center justify-center transition-all ${checkoutStep === "payment" ? "border-gold bg-gold/10" : "border-zinc-800"}`}>3</span>
-                            Payment
+                          <div className="w-4 md:w-8 h-[1px] bg-zinc-100" />
+                          <div className={`flex items-center gap-2 text-[7px] md:text-[8px] uppercase tracking-[0.15em] font-black transition-all ${checkoutStep === "payment" ? "text-gold" : "text-zinc-300"}`}>
+                            <span className={`w-4 h-4 md:w-5 md:h-5 rounded-full border-2 flex items-center justify-center transition-all ${checkoutStep === "payment" ? "border-gold bg-gold/10" : "border-zinc-200"}`}>3</span>
+                            Settlement
                           </div>
                         </div>
                       </div>
-                      <button onClick={() => setShowCheckout(false)} className="group p-2 hover:bg-white/5 rounded-full transition-all"><X className="w-6 h-6 md:w-8 md:h-8 text-zinc-500 group-hover:text-white group-hover:rotate-90 transition-all duration-500" /></button>
+                      <button onClick={() => setShowCheckout(false)} className="group p-2 hover:bg-zinc-100 rounded-full transition-all"><X className="w-6 h-6 md:w-8 md:h-8 text-zinc-400 group-hover:text-black group-hover:rotate-90 transition-all duration-500" /></button>
                     </div>
 
                     <AnimatePresence mode="wait">
@@ -466,26 +469,26 @@ export default function App() {
                           <div className="space-y-8 md:space-y-10">
                             {/* Specifications listed in sidebar summary already, but we can add more info here if needed */}
                             <div className="space-y-6">
-                              <h4 className="text-[10px] md:text-sm font-black uppercase tracking-[0.3em] italic text-gold">Authenticity Guaranteed</h4>
-                              <p className="text-zinc-500 text-xs md:text-sm leading-relaxed">Each piece in our collection undergoes a rigorous multi-point inspection to ensure absolute precision and quality. We source only the finest materials for our tactical and minimalist designs.</p>
+                              <h4 className="text-[10px] md:text-sm font-black uppercase tracking-[0.3em] italic text-gold">Impeccable Pedigree</h4>
+                              <p className="text-zinc-500 text-xs md:text-sm leading-relaxed italic font-medium">This curated selection represents the pinnacle of aesthetic engineering. Every component has been meticulously evaluated for architectural integrity and visual impact.</p>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
-                              <div className="bg-white/5 p-4 rounded-xl border border-white/5">
-                                <span className="block text-[8px] text-zinc-500 uppercase tracking-widest mb-1">Quality Control</span>
-                                <span className="text-[10px] text-white font-bold">Passed</span>
+                              <div className="bg-zinc-50 p-4 rounded-xl border border-zinc-100">
+                                <span className="block text-[8px] text-zinc-400 uppercase tracking-widest mb-1 font-black italic">Quality Check</span>
+                                <span className="text-[10px] text-black font-black uppercase italic">Certified</span>
                               </div>
-                              <div className="bg-white/5 p-4 rounded-xl border border-white/5">
-                                <span className="block text-[8px] text-zinc-500 uppercase tracking-widest mb-1">Warranty</span>
-                                <span className="text-[10px] text-white font-bold">6 Months</span>
+                              <div className="bg-zinc-50 p-4 rounded-xl border border-zinc-100">
+                                <span className="block text-[8px] text-zinc-400 uppercase tracking-widest mb-1 font-black italic">Assurance</span>
+                                <span className="text-[10px] text-black font-black uppercase italic">Limited</span>
                               </div>
                             </div>
                           </div>
 
                           <button 
                             onClick={() => setCheckoutStep("shipping")}
-                            className="bg-white text-black py-4 md:py-5 rounded-full font-black uppercase tracking-[0.2em] hover:bg-gold transition-all duration-500 shadow-2xl mt-auto text-[10px] md:text-xs"
+                            className="bg-black text-white py-4 md:py-5 rounded-full font-black uppercase tracking-[0.2em] hover:bg-gold transition-all duration-500 shadow-2xl mt-auto text-[10px] md:text-xs"
                           >
-                            Acquire Now • ₹999
+                            Initiate Transfer • ₹999
                           </button>
                         </motion.div>
                       ) : checkoutStep === "shipping" ? (
@@ -498,24 +501,24 @@ export default function App() {
                         >
                           <form onSubmit={handleNextStep} className="space-y-6 md:space-y-8">
                             <div className="space-y-3 md:space-y-4">
-                              <label className="text-[9px] md:text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] flex items-center gap-3 italic"><User className="w-3 md:w-4 h-3 md:h-4 text-gold" /> Consignee Name</label>
-                              <input required type="text" placeholder="FULL NAME" className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 md:p-5 focus:border-gold outline-none transition-all placeholder:text-zinc-800 font-bold text-sm" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
+                              <label className="text-[9px] md:text-[10px] font-black text-zinc-400 uppercase tracking-[0.3em] flex items-center gap-3 italic"><User className="w-3 md:w-4 h-3 md:h-4 text-gold" /> Direct Recipient</label>
+                              <input required type="text" placeholder="FULL NAME" className="w-full bg-zinc-50 border border-zinc-100 rounded-2xl p-4 md:p-5 focus:border-gold outline-none transition-all placeholder:text-zinc-300 font-black italic text-sm text-black" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
                             </div>
                             <div className="space-y-3 md:space-y-4">
-                              <label className="text-[9px] md:text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] flex items-center gap-3 italic"><Phone className="text-gold w-3 md:w-4 h-3 md:h-4" /> Contact Number</label>
-                              <input required type="tel" placeholder="10-DIGIT MOBILE" className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 md:p-5 focus:border-gold outline-none transition-all placeholder:text-zinc-800 font-bold text-sm" value={formData.number} onChange={e => setFormData({...formData, number: e.target.value})} />
+                              <label className="text-[9px] md:text-[10px] font-black text-zinc-400 uppercase tracking-[0.3em] flex items-center gap-3 italic"><Phone className="text-gold w-3 md:w-4 h-3 md:h-4" /> Secure Channel</label>
+                              <input required type="tel" placeholder="10-DIGIT MOBILE" className="w-full bg-zinc-50 border border-zinc-100 rounded-2xl p-4 md:p-5 focus:border-gold outline-none transition-all placeholder:text-zinc-300 font-black italic text-sm text-black" value={formData.number} onChange={e => setFormData({...formData, number: e.target.value})} />
                             </div>
                             <div className="space-y-3 md:space-y-4">
-                              <label className="text-[9px] md:text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] flex items-center gap-3 italic"><MapPin className="w-3 md:w-4 h-3 md:h-4 text-gold" /> Shipping Address</label>
-                              <textarea required rows={3} placeholder="COMPLETE ADDRESS WITH PINCODE" className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 md:p-5 focus:border-gold outline-none transition-all placeholder:text-zinc-800 font-bold resize-none text-sm" value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} />
+                              <label className="text-[9px] md:text-[10px] font-black text-zinc-400 uppercase tracking-[0.3em] flex items-center gap-3 italic"><MapPin className="w-3 md:w-4 h-3 md:h-4 text-gold" /> Drop Location</label>
+                              <textarea required rows={3} placeholder="COMPLETE ADDRESS WITH PINCODE" className="w-full bg-zinc-50 border border-zinc-100 rounded-2xl p-4 md:p-5 focus:border-gold outline-none transition-all placeholder:text-zinc-300 font-black italic resize-none text-sm text-black" value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} />
                             </div>
                             
                             <div className="flex gap-4">
-                              <button type="button" onClick={() => setCheckoutStep("detail")} className="w-1/4 border border-white/10 rounded-full text-zinc-500 hover:text-white transition-colors">
+                              <button type="button" onClick={() => setCheckoutStep("detail")} className="w-1/4 border border-zinc-100 rounded-full text-zinc-300 hover:text-black transition-colors">
                                 <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 mx-auto" />
                               </button>
-                              <button type="submit" className="flex-1 bg-white text-black py-4 md:py-5 rounded-full font-black uppercase tracking-[0.2em] hover:bg-gold transition-all duration-500 shadow-2xl text-[10px] md:text-xs">
-                                Proceed to Payment
+                              <button type="submit" className="flex-1 bg-black text-white py-4 md:py-5 rounded-full font-black uppercase tracking-[0.2em] hover:bg-gold transition-all duration-500 shadow-2xl text-[10px] md:text-xs">
+                                Confirm Logistics
                               </button>
                             </div>
                           </form>
@@ -529,36 +532,36 @@ export default function App() {
                           className="flex flex-col flex-1 space-y-8 md:space-y-10"
                         >
                           <div className="flex items-center justify-between">
-                            <button onClick={() => setCheckoutStep("shipping")} className="text-[8px] md:text-[10px] text-zinc-500 uppercase tracking-widest font-black hover:text-white flex items-center gap-2 transition-colors">
-                              <ChevronLeft className="w-3 md:w-4 h-3 md:h-4" /> Logistics Adjust
+                            <button onClick={() => setCheckoutStep("shipping")} className="text-[8px] md:text-[10px] text-zinc-400 uppercase tracking-widest font-black hover:text-black flex items-center gap-2 transition-colors">
+                              <ChevronLeft className="w-3 md:w-4 h-3 md:h-4" /> Revise Logistics
                             </button>
-                            <div className="text-[8px] md:text-[9px] text-gold uppercase tracking-[0.4em] font-black italic">UPI Protocol Active</div>
+                            <div className="text-[8px] md:text-[9px] text-gold uppercase tracking-[0.4em] font-black italic">Transmission Active</div>
                           </div>
 
-                          <div className="p-8 md:p-12 bg-white/5 border-2 border-gold/40 rounded-[2rem] md:rounded-[3rem] flex flex-col items-center text-center space-y-8 md:space-y-10 relative shadow-2xl">
-                            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent" />
+                          <div className="p-8 md:p-12 bg-zinc-50 border-2 border-gold/20 rounded-[2rem] md:rounded-[3rem] flex flex-col items-center text-center space-y-8 md:space-y-10 relative shadow-xl">
+                            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent opacity-40" />
                             
                             <div className="space-y-2 md:space-y-3">
-                              <h4 className="text-2xl md:text-3xl font-display font-black italic tracking-widest text-white uppercase">Scan & Secure</h4>
-                              <p className="text-[8px] md:text-[10px] text-zinc-500 font-black uppercase tracking-[0.4em]">UPI TARGET: ansumanverma@fam</p>
+                              <h4 className="text-2xl md:text-3xl font-display font-black italic tracking-widest text-black uppercase">Settlement Protocol</h4>
+                              <p className="text-[8px] md:text-[10px] text-zinc-400 font-black uppercase tracking-[0.4em] italic">UP-ID: ansumanverma@fam</p>
                             </div>
 
                             <div className="relative">
-                              <div className="absolute -inset-6 md:-inset-10 bg-gold/10 blur-3xl rounded-full opacity-40 animate-pulse" />
-                              <img src={QR_CODE} alt="UPI QR" className="relative w-48 h-48 md:w-56 md:h-56 p-4 md:p-6 bg-[#fde7cf] rounded-[1.5rem] md:rounded-[2rem] shadow-[0_0_50px_rgba(255,255,255,0.05)] border-4 border-gold/10" />
+                              <div className="absolute -inset-6 md:-inset-10 bg-gold/5 blur-3xl rounded-full opacity-60 animate-pulse" />
+                              <img src={QR_CODE} alt="UPI QR" className="relative w-48 h-48 md:w-56 md:h-56 p-4 md:p-6 bg-[#fde7cf] rounded-[1.5rem] md:rounded-[2rem] shadow-[0_20px_50px_rgba(212,175,55,0.1)] border-4 border-gold/10" />
                             </div>
 
                             <div className="space-y-4 max-w-sm">
-                              <p className="text-[10px] md:text-[11px] text-zinc-400 font-bold uppercase tracking-[0.15em] leading-relaxed italic animate-pulse">
-                                Awaiting payment confirmation...
+                              <p className="text-[10px] md:text-[11px] text-zinc-400 font-black uppercase tracking-[0.2em] leading-relaxed italic animate-pulse">
+                                Awaiting confirmation...
                               </p>
                             </div>
 
                             <button 
                               onClick={() => setIsSuccess(true)}
-                              className="w-full bg-gold text-black py-4 md:py-6 rounded-full font-black uppercase tracking-[0.2em] hover:bg-white transition-all duration-500 shadow-2xl transform active:scale-95 text-[10px] md:text-xs"
+                              className="w-full bg-black text-white py-4 md:py-6 rounded-full font-black uppercase tracking-[0.2em] hover:bg-gold transition-all duration-500 shadow-xl transform active:scale-95 text-[10px] md:text-xs"
                             >
-                              I Have Paid • ₹999
+                              Finalize Payment • ₹999
                             </button>
                           </div>
                         </motion.div>
