@@ -349,27 +349,27 @@ export default function App() {
                 </div>
               ) : (
                 <div className="flex flex-col md:flex-row w-full overflow-hidden">
-                  {/* Sidebar - Detailed Order Summary / Detail Gallery */}
-                  <div className="w-full md:w-5/12 p-6 md:p-12 bg-charcoal/20 border-b md:border-b-0 md:border-r border-white/5 flex flex-col shadow-2xl overflow-y-auto md:max-h-full">
-                    <div className="mb-6 md:mb-8">
-                      <span className="text-[10px] text-zinc-500 uppercase tracking-[0.4em] font-black italic block mb-4">
-                        {checkoutStep === "detail" ? "Product View" : "Selection Summary"}
-                      </span>
-                      <div className="relative group/modal inline-block w-full">
-                        <AnimatePresence mode="wait">
-                          <motion.img 
-                            key={`${selectedProduct.id}-${activeGalleryIndex}`}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            src={selectedProduct.images[activeGalleryIndex]} 
-                            alt={selectedProduct.name} 
-                            className="w-full aspect-square object-cover rounded-3xl shadow-xl ring-1 ring-white/10" 
-                          />
-                        </AnimatePresence>
-                      </div>
-                      
-                      {checkoutStep === "detail" && (
+                  {/* Sidebar - Detailed Order Summary / Detail Gallery - ONLY SHOWN IN DETAIL STEP */}
+                  {checkoutStep === "detail" && (
+                    <div className="w-full md:w-5/12 p-6 md:p-12 bg-charcoal/20 border-b md:border-b-0 md:border-r border-white/5 flex flex-col shadow-2xl overflow-y-auto md:max-h-full">
+                      <div className="mb-6 md:mb-8">
+                        <span className="text-[10px] text-zinc-500 uppercase tracking-[0.4em] font-black italic block mb-4">
+                          Product View
+                        </span>
+                        <div className="relative group/modal inline-block w-full">
+                          <AnimatePresence mode="wait">
+                            <motion.img 
+                              key={`${selectedProduct.id}-${activeGalleryIndex}`}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              src={selectedProduct.images[activeGalleryIndex]} 
+                              alt={selectedProduct.name} 
+                              className="w-full aspect-square object-cover rounded-3xl shadow-xl ring-1 ring-white/10" 
+                            />
+                          </AnimatePresence>
+                        </div>
+                        
                         <div className="flex gap-3 mt-4 overflow-x-auto no-scrollbar py-2">
                           {selectedProduct.images.map((img, i) => (
                             <button 
@@ -381,17 +381,15 @@ export default function App() {
                             </button>
                           ))}
                         </div>
-                      )}
-                    </div>
-
-                    <div className="space-y-6 flex-1">
-                      <div>
-                        <h2 className="text-2xl font-display font-black tracking-tight mb-2">{selectedProduct.name}</h2>
-                        <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Premium Edition • {selectedProduct.category}</p>
                       </div>
 
-                      <div className="pt-6 border-t border-white/5 space-y-4">
-                        {checkoutStep === "detail" ? (
+                      <div className="space-y-6 flex-1">
+                        <div>
+                          <h2 className="text-2xl font-display font-black tracking-tight mb-2">{selectedProduct.name}</h2>
+                          <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Premium Edition • {selectedProduct.category}</p>
+                        </div>
+
+                        <div className="pt-6 border-t border-white/5 space-y-4">
                           <div className="space-y-3">
                             <p className="text-xs text-zinc-400 italic">"{selectedProduct.description}"</p>
                             <div className="flex flex-wrap gap-2">
@@ -400,35 +398,24 @@ export default function App() {
                               ))}
                             </div>
                           </div>
-                        ) : (
-                          <>
-                            <div className="flex justify-between text-xs font-bold uppercase tracking-widest text-zinc-500">
-                              <span>Subtotal</span>
-                              <span className="text-white">₹999</span>
-                            </div>
-                            <div className="flex justify-between text-xs font-bold uppercase tracking-widest text-zinc-500">
-                              <span>Shipping</span>
-                              <span className="text-gold italic">Complimentary</span>
-                            </div>
-                          </>
-                        )}
-                        
-                        <div className="pt-6 border-t border-white/10 flex justify-between items-center text-xl font-display font-black">
-                          <span className="text-white">Total</span>
-                          <span className="text-gold">₹999</span>
+                          
+                          <div className="pt-6 border-t border-white/10 flex justify-between items-center text-xl font-display font-black">
+                            <span className="text-white">Total</span>
+                            <span className="text-gold">₹999</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="mt-8 p-4 bg-gold/5 rounded-2xl border border-gold/10">
+                        <div className="flex items-center gap-3 text-[9px] font-black text-gold uppercase tracking-[0.2em] italic">
+                          <ShieldCheck className="w-4 h-4" /> Secure Acquisition Protocol
                         </div>
                       </div>
                     </div>
-
-                    <div className="mt-8 p-4 bg-gold/5 rounded-2xl border border-gold/10">
-                      <div className="flex items-center gap-3 text-[9px] font-black text-gold uppercase tracking-[0.2em] italic">
-                        <ShieldCheck className="w-4 h-4" /> Secure Acquisition Protocol
-                      </div>
-                    </div>
-                  </div>
+                  )}
 
                   {/* Main Content Area */}
-                  <div className="w-full md:w-7/12 p-6 md:p-12 overflow-y-auto bg-rich-black flex flex-col">
+                  <div className={`w-full ${checkoutStep === "detail" ? "md:w-7/12" : "md:w-full"} p-6 md:p-12 overflow-y-auto bg-rich-black flex flex-col`}>
                     <div className="flex justify-between items-start mb-8 md:mb-12">
                       <div className="space-y-4 md:space-y-6">
                         <h3 className="text-xl md:text-2xl font-display font-black italic tracking-tighter">
