@@ -120,30 +120,30 @@ export default function App() {
   const filteredProducts = PRODUCTS.filter(p => p.category === currentCategory);
 
   return (
-    <div className={`min-h-screen transition-all duration-700 ${currentCategory === "Aesthetic Outfits" ? "bg-zinc-50 text-black" : "bg-rich-black text-white"} selection:bg-gold selection:text-black font-sans leading-relaxed luxury-bg`}>
+    <div className="min-h-screen transition-all duration-700 bg-zinc-50 text-black selection:bg-gold selection:text-black font-sans leading-relaxed luxury-bg">
       {/* Dynamic Header */}
       <header 
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 md:px-12 px-6 flex justify-between items-center ${
           isScrolled 
-            ? (currentCategory === "Aesthetic Outfits" ? "bg-white/95 backdrop-blur-3xl border-b border-zinc-200 py-4 shadow-sm" : "bg-rich-black/95 backdrop-blur-3xl border-b border-white/10 py-4") 
+            ? "bg-white/95 backdrop-blur-3xl border-b border-zinc-200 py-4 shadow-sm" 
             : "bg-transparent py-8"
         }`}
       >
         <div className="flex items-center gap-10">
           <button onClick={() => setIsMenuOpen(true)} className="group relative">
-            <Menu className={`w-7 h-7 transition-colors ${currentCategory === "Aesthetic Outfits" ? "text-black hover:text-gold" : "text-white hover:text-gold"}`} />
+            <Menu className={`w-7 h-7 transition-colors hover:text-gold ${isScrolled ? "text-black" : "text-white"}`} />
           </button>
-          <a href="#" className="font-display font-extrabold text-2xl tracking-[0.05em] flex items-center gap-2">
+          <a href="#" className={`font-display font-extrabold text-2xl tracking-[0.05em] flex items-center gap-2 ${isScrolled ? "text-black" : "text-white"}`}>
             HONEYSFASHION<span className="text-gold italic">.STORE</span>
           </a>
         </div>
 
-        <nav className="hidden xl:flex items-center gap-12 text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-500">
+        <nav className={`hidden xl:flex items-center gap-12 text-[10px] uppercase tracking-[0.3em] font-bold ${isScrolled ? "text-zinc-400" : "text-zinc-300"}`}>
           {CATEGORIES.map(cat => (
             <button 
               key={cat} 
               onClick={() => setCurrentCategory(cat)}
-              className={`hover:text-white transition-all relative py-2 ${currentCategory === cat ? "text-gold" : ""}`}
+              className={`transition-all relative py-2 ${currentCategory === cat ? "text-gold" : (isScrolled ? "hover:text-black" : "hover:text-white")}`}
             >
               {cat}
               {currentCategory === cat && <motion.div layoutId="nav-line" className="absolute bottom-0 left-0 w-full h-[2px] bg-gold rounded-full" />}
@@ -151,8 +151,15 @@ export default function App() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-6">
-          {/* Direct checkout model - cart removed */}
+        <div className="flex items-center gap-4 md:gap-8">
+          <button className={`hidden md:flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] italic hover:text-gold transition-colors ${isScrolled ? "text-black" : "text-white"}`}>
+            Account <User className="w-4 h-4" />
+          </button>
+          <div className={`h-6 w-[1px] hidden md:block ${isScrolled ? "bg-zinc-200" : "bg-white/20"}`} />
+          <button className="relative p-2 group">
+            <ShoppingBag className={`w-6 h-6 hover:text-gold transition-colors ${isScrolled ? "text-black" : "text-white"}`} />
+            <span className="absolute -top-1 -right-1 bg-gold text-black text-[8px] font-black w-4 h-4 rounded-full flex items-center justify-center">0</span>
+          </button>
         </div>
       </header>
 
@@ -237,10 +244,8 @@ export default function App() {
             <button key={i} onClick={() => setActiveSlide(i)} className={`w-8 h-[2px] transition-all rounded-full ${activeSlide === i ? "bg-gold w-16" : "bg-white/20"}`} />
           ))}
         </div>
-      </section>
-
-      {/* Advantage Banner */}
-      <section className={`transition-all duration-700 backdrop-blur-md border-y py-16 px-6 ${currentCategory === "Aesthetic Outfits" ? "bg-white/50 border-zinc-200" : "bg-rich-black/50 border-white/5"}`}>
+      </section>      {/* Advantage Banner */}
+      <section className="transition-all duration-700 backdrop-blur-md border-y py-16 px-6 bg-white/50 border-zinc-200">
         <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-12">
           {[
             { icon: Truck, title: "2-3 Days Shipping", desc: "Express delivery across the nation." },
@@ -249,18 +254,18 @@ export default function App() {
             { icon: Leaf, title: "Eco-Friendly Elite", desc: "Sustainably crafted luxury vibes." }
           ].map((item, i) => (
             <motion.div whileHover={{ y: -5 }} key={i} className="flex flex-col items-center text-center space-y-4">
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border mb-2 transition-all duration-500 ${currentCategory === "Aesthetic Outfits" ? "bg-zinc-50 border-zinc-200 hover:border-gold" : "bg-white/5 border-white/10 hover:border-gold/50"}`}>
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center border mb-2 transition-all duration-500 bg-zinc-50 border-zinc-200 hover:border-gold">
                 <item.icon className="w-7 h-7 text-gold" />
               </div>
-              <h4 className={`text-[10px] font-black uppercase tracking-[0.2em] ${currentCategory === "Aesthetic Outfits" ? "text-black" : "text-white"}`}>{item.title}</h4>
-              <p className={`text-[10px] font-bold max-w-[150px] ${currentCategory === "Aesthetic Outfits" ? "text-zinc-400" : "text-zinc-500"}`}>{item.desc}</p>
+              <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-black">{item.title}</h4>
+              <p className="text-[10px] font-bold max-w-[150px] text-zinc-400">{item.desc}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* Category Navigation Bar */}
-      <div className={`sticky top-16 md:top-24 z-40 backdrop-blur-2xl border-b transition-all duration-700 px-6 ${currentCategory === "Aesthetic Outfits" ? "bg-white/80 border-zinc-200" : "bg-rich-black/80 border-white/10"}`}>
+      <div className="sticky top-16 md:top-24 z-40 backdrop-blur-2xl border-b transition-all duration-700 px-6 bg-white/80 border-zinc-200">
         <div className="max-w-7xl mx-auto flex items-center justify-start md:justify-center gap-8 py-6 overflow-x-auto no-scrollbar">
           {CATEGORIES.map(cat => (
             <button 
@@ -268,7 +273,7 @@ export default function App() {
               onClick={() => setCurrentCategory(cat)}
               className={`whitespace-nowrap text-[9px] uppercase tracking-[0.3em] font-black px-8 py-3 rounded-full border transition-all duration-500 hover:scale-105 ${
                 currentCategory === cat ? "bg-gold border-gold text-black shadow-lg shadow-gold/20" : 
-                (currentCategory === "Aesthetic Outfits" ? "border-zinc-200 text-zinc-400 hover:border-zinc-400" : "border-white/10 text-zinc-500 hover:border-white/30")
+                "border-zinc-200 text-zinc-400 hover:border-zinc-400"
               }`}
             >
               {cat}
@@ -282,10 +287,10 @@ export default function App() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
             <div>
-              <span className={`font-display font-black text-[10px] tracking-[0.6em] uppercase block mb-6 italic underline decoration-gold/10 underline-offset-8 ${currentCategory === "Aesthetic Outfits" ? "text-zinc-400" : "text-gold"}`}>Signature Series</span>
-              <h2 className={`text-4xl md:text-7xl font-display font-light italic ${currentCategory === "Aesthetic Outfits" ? "text-black" : "text-white"}`}>The <span className={`font-black not-italic ${currentCategory === "Aesthetic Outfits" ? "text-black" : "text-white"}`}>{currentCategory} Collection</span></h2>
+              <span className="font-display font-black text-[10px] tracking-[0.6em] uppercase block mb-6 italic underline decoration-gold/10 underline-offset-8 text-black/30">Signature Series</span>
+              <h2 className="text-4xl md:text-7xl font-display font-light italic text-black">The <span className="font-black not-italic text-black">{currentCategory} Collection</span></h2>
             </div>
-            <div className={`uppercase tracking-widest text-[10px] font-bold ${currentCategory === "Aesthetic Outfits" ? "text-zinc-400" : "text-zinc-500"}`}>Exclusive Price: <span className="text-gold text-2xl font-black ml-2">₹999</span></div>
+            <div className="uppercase tracking-widest text-[10px] font-bold text-zinc-400">Exclusive Price: <span className="text-gold text-2xl font-black ml-2">₹999</span></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">
@@ -303,7 +308,7 @@ export default function App() {
                 className="group cursor-pointer perspective-1000"
                 onClick={() => handleBuyNow(product)}
               >
-                <div className={`relative aspect-[1/1] overflow-hidden rounded-3xl mb-10 border transition-all duration-500 shadow-2xl backdrop-blur-sm ${currentCategory === "Aesthetic Outfits" ? "bg-white border-zinc-100 group-hover:shadow-zinc-200" : "bg-white/5 border-white/10 group-hover:shadow-gold/10 group-hover:border-gold/30"}`}>
+                <div className="relative aspect-[1/1] overflow-hidden rounded-3xl mb-10 border transition-all duration-500 shadow-2xl backdrop-blur-sm bg-white border-zinc-100 group-hover:shadow-zinc-200">
                   <motion.div 
                     className="w-full h-full"
                     whileHover={{ rotateY: 15, rotateX: -5, scale: 1.05 }}
@@ -311,29 +316,29 @@ export default function App() {
                   >
                     <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover" />
                   </motion.div>
-                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none ${currentCategory === "Aesthetic Outfits" ? "bg-zinc-100/20" : "bg-rich-black/20"}`}>
-                    <span className={`text-[10px] font-black uppercase tracking-[0.4em] italic ${currentCategory === "Aesthetic Outfits" ? "text-black/60" : "text-white/50"}`}>View Archive</span>
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none bg-zinc-100/10">
+                    <span className="text-[10px] font-black uppercase tracking-[0.4em] italic text-black/40">View Archive</span>
                   </div>
-                  <div className={`absolute top-6 left-6 backdrop-blur-xl px-5 py-2 rounded-full border text-[9px] font-black uppercase tracking-[0.2em] italic ${currentCategory === "Aesthetic Outfits" ? "bg-white/80 border-zinc-200 text-black" : "bg-rich-black/80 border-white/10 text-white"}`}>
+                  <div className="absolute top-6 left-6 backdrop-blur-xl px-5 py-2 rounded-full border text-[9px] font-black uppercase tracking-[0.2em] italic bg-white/80 border-zinc-200 text-black">
                     {product.brand}
                   </div>
                   <button 
                     onClick={(e) => { e.stopPropagation(); /* Future wishlist logic */ }}
-                    className={`absolute top-6 right-6 p-3 rounded-full transition-colors group/heart border ${currentCategory === "Aesthetic Outfits" ? "bg-zinc-50 border-zinc-100 hover:bg-gold/10" : "bg-white/5 border-white/5 hover:bg-gold/20"}`}
+                    className="absolute top-6 right-6 p-3 rounded-full transition-colors group/heart border bg-zinc-50 border-zinc-100 hover:bg-gold/10"
                   >
-                    <Heart className={`w-5 h-5 transition-colors ${currentCategory === "Aesthetic Outfits" ? "text-zinc-300 group-hover/heart:text-gold" : "text-zinc-500 group-hover/heart:text-gold"}`} />
+                    <Heart className="w-5 h-5 transition-colors text-zinc-300 group-hover/heart:text-gold" />
                   </button>
                 </div>
                 <div className="flex justify-between items-start px-4">
                   <div className="flex-1">
-                    <h3 className={`font-display font-bold text-2xl mb-2 italic tracking-tight ${currentCategory === "Aesthetic Outfits" ? "text-black" : "text-white"}`}>{product.name}</h3>
-                    <p className={`text-[10px] uppercase tracking-[0.3em] font-black flex items-center gap-2 ${currentCategory === "Aesthetic Outfits" ? "text-zinc-400" : "text-zinc-500"}`}>
+                    <h3 className="font-display font-bold text-2xl mb-2 italic tracking-tight text-black">{product.name}</h3>
+                    <p className="text-[10px] uppercase tracking-[0.3em] font-black flex items-center gap-2 text-zinc-400">
                        Archive Entry <span className="w-1 h-1 bg-gold rounded-full" /> Verified
                     </p>
                   </div>
                   <div className="text-right">
-                    <span className={`text-2xl font-black ${currentCategory === "Aesthetic Outfits" ? "text-black" : "text-gold"}`}>₹999</span>
-                    <p className={`text-[10px] line-through font-bold ${currentCategory === "Aesthetic Outfits" ? "text-zinc-300" : "text-zinc-600"}`}>₹4,999</p>
+                    <span className="text-2xl font-black text-black">₹999</span>
+                    <p className="text-[10px] line-through font-bold text-zinc-300">₹4,999</p>
                   </div>
                 </div>
               </motion.div>
