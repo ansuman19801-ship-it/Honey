@@ -330,36 +330,43 @@ export default function App() {
       {/* Checkout Experience */}
       <AnimatePresence>
         {showCheckout && selectedProduct && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12 overflow-y-auto">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 md:p-12 overflow-y-auto">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => { if(!isSuccess) setShowCheckout(false); }} className="fixed inset-0 bg-black/98 backdrop-blur-3xl" />
             
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }} 
-              animate={{ opacity: 1, scale: 1 }} 
-              exit={{ opacity: 0, scale: 0.9 }} 
-              className="relative w-full max-w-6xl bg-rich-black border border-white/10 rounded-[2rem] md:rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-[0_0_150px_rgba(212,175,55,0.05)] max-h-[90vh]"
+              key={selectedProduct.id}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }} 
+              animate={{ opacity: 1, scale: 1, y: 0 }} 
+              exit={{ opacity: 0, scale: 0.9, y: 20 }} 
+              className="relative w-full max-w-6xl bg-rich-black border border-white/10 rounded-[2rem] md:rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-[0_0_150px_rgba(212,175,55,0.05)] my-4 md:my-0 md:max-h-[90vh]"
             >
               {isSuccess ? (
                 <div className="w-full py-20 md:py-32 px-8 md:px-16 text-center flex flex-col items-center justify-center bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] overflow-y-auto">
                   <CheckCircle2 className="w-16 h-16 md:w-24 md:h-24 text-gold mb-8 md:mb-12 animate-bounce" />
-                  <h2 className="text-4xl md:text-7xl font-display font-black mb-6 md:mb-8 italic tracking-tighter">ORDER SECURED.</h2>
+                  <h2 className="text-4xl md:text-7xl font-display font-black mb-6 md:mb-8 italic tracking-tighter text-white">ORDER SECURED.</h2>
                   <p className="text-zinc-500 text-base md:text-xl max-w-xl mb-10 md:mb-16 leading-relaxed">Congrats <span className="text-white font-bold">{formData.name}</span>! Your <span className="text-gold font-bold">{selectedProduct.name}</span> has been secured. Our team will dispatch it today. Expect delivery in 2-3 days.</p>
                   <button onClick={() => { setShowCheckout(false); setIsSuccess(false); setFormData({name: "", number: "", address: ""}); }} className="bg-white text-black px-12 md:px-16 py-4 md:py-5 rounded-full font-black uppercase tracking-widest transition-all hover:bg-gold hover:scale-105 active:scale-95 shadow-xl text-xs">Return To Store</button>
                 </div>
               ) : (
                 <div className="flex flex-col md:flex-row w-full overflow-hidden">
                   {/* Sidebar - Detailed Order Summary / Detail Gallery */}
-                  <div className="w-full md:w-5/12 p-6 md:p-12 bg-charcoal/20 border-b md:border-b-0 md:border-r border-white/5 flex flex-col shadow-2xl overflow-y-auto max-h-[40vh] md:max-h-full">
+                  <div className="w-full md:w-5/12 p-6 md:p-12 bg-charcoal/20 border-b md:border-b-0 md:border-r border-white/5 flex flex-col shadow-2xl overflow-y-auto md:max-h-full">
                     <div className="mb-6 md:mb-8">
                       <span className="text-[10px] text-zinc-500 uppercase tracking-[0.4em] font-black italic block mb-4">
                         {checkoutStep === "detail" ? "Product View" : "Selection Summary"}
                       </span>
                       <div className="relative group/modal inline-block w-full">
-                        <img 
-                          src={selectedProduct.images[activeGalleryIndex]} 
-                          alt={selectedProduct.name} 
-                          className="w-full aspect-square object-cover rounded-3xl shadow-xl ring-1 ring-white/10" 
-                        />
+                        <AnimatePresence mode="wait">
+                          <motion.img 
+                            key={`${selectedProduct.id}-${activeGalleryIndex}`}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            src={selectedProduct.images[activeGalleryIndex]} 
+                            alt={selectedProduct.name} 
+                            className="w-full aspect-square object-cover rounded-3xl shadow-xl ring-1 ring-white/10" 
+                          />
+                        </AnimatePresence>
                       </div>
                       
                       {checkoutStep === "detail" && (
@@ -421,7 +428,7 @@ export default function App() {
                   </div>
 
                   {/* Main Content Area */}
-                  <div className="w-full md:w-7/12 p-6 md:p-12 overflow-y-auto bg-rich-black flex flex-col min-h-[50vh] md:min-h-0">
+                  <div className="w-full md:w-7/12 p-6 md:p-12 overflow-y-auto bg-rich-black flex flex-col">
                     <div className="flex justify-between items-start mb-8 md:mb-12">
                       <div className="space-y-4 md:space-y-6">
                         <h3 className="text-xl md:text-2xl font-display font-black italic tracking-tighter">
