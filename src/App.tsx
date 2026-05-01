@@ -21,8 +21,7 @@ import {
   CheckCircle2,
   Box,
   Truck,
-  Heart,
-  Star
+  Heart
 } from "lucide-react";
 
 // Image constants
@@ -39,45 +38,33 @@ const QR_CODE = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=u
 type Category = "Watches" | "Shoes" | "Baggy Jeans" | "Aesthetic Outfits";
 const CATEGORIES: Category[] = ["Watches", "Shoes", "Baggy Jeans", "Aesthetic Outfits"];
 
-interface Review {
-  id: number;
-  author: string;
-  rating: number;
-  comment: string;
-  date: string;
-}
-
-const SAMPLE_REVIEWS: Review[] = [
-  { id: 1, author: "Rahul S.", rating: 5, comment: "Absolutely stunning quality. The weight feels premium.", date: "2 days ago" },
-  { id: 2, author: "Priya M.", rating: 4, comment: "Great fit and finish. Very satisfied with the aesthetic.", date: "1 week ago" }
-];
 
 const PRODUCTS = [
   // WATCHES (10 total: 5 Rolex Style, 5 Seiko Style)
-  { id: 1, category: "Watches" as Category, brand: "Rolex Style", name: "Datejust Ebony Mod", price: 999, images: ["/src/assets/images/rolex_classic_dark_1777619040163.png", "/src/assets/images/rolex_gold_daydate_1777619061428.png"], description: "Fluted bezel, Jubilee bracelet, precision automatic.", specs: ["41mm Case", "Sapphire Glass", "Date Display"], reviews: SAMPLE_REVIEWS },
-  { id: 2, category: "Watches" as Category, brand: "Rolex Style", name: "Day-Date Presidential Gold", price: 999, images: ["/src/assets/images/rolex_gold_daydate_1777619061428.png", "/src/assets/images/rolex_classic_dark_1777619040163.png"], description: "Full gold finish, the peak of presidential luxury.", specs: ["36mm Case", "Gold-Plated Steel", "Day-Date Window"], reviews: SAMPLE_REVIEWS },
-  { id: 3, category: "Watches" as Category, brand: "Rolex Style", name: "Submariner Hulk Edition", price: 999, images: ["/src/assets/images/rolex_submariner_hulk_1777619078004.png", "/src/assets/images/rolex_pepsi_gmt_1777619093643.png"], description: "Deep green sunburst dial with matching ceramic bezel.", specs: ["40mm Case", "Ceramic Insert", "Oyster Braclet"], reviews: [SAMPLE_REVIEWS[0]] },
-  { id: 4, category: "Watches" as Category, brand: "Rolex Style", name: "GMT Master II Pepsi", price: 999, images: ["/src/assets/images/rolex_pepsi_gmt_1777619093643.png", "/src/assets/images/rolex_submariner_hulk_1777619078004.png"], description: "Iconic red and blue bezel for the modern traveler.", specs: ["40mm Case", "Jubilee Band", "GMT Movement"], reviews: SAMPLE_REVIEWS },
-  { id: 5, category: "Watches" as Category, brand: "Rolex Style", name: "Yacht-Master Oysterflex", price: 999, images: ["/src/assets/images/rolex_yacht_master_rose_1777619110502.png", "/src/assets/images/rolex_classic_dark_1777619040163.png"], description: "Rose gold luxury paired with a sporty matte black strap.", specs: ["40mm Case", "Matte Ceramic", "Flexible Strap"], reviews: [SAMPLE_REVIEWS[1]] },
-  { id: 6, category: "Watches" as Category, brand: "Seiko Style", name: "Prospex Turtle Stealth", price: 999, images: ["/src/assets/images/seiko_prospex_turtle_1777619127382.png", "/src/assets/images/seiko_alpinist_green_1777619144101.png"], description: "Rugged professional diver with the classic cushion case.", specs: ["44mm Case", "NH35 Automatic", "High Lume"], reviews: SAMPLE_REVIEWS },
-  { id: 7, category: "Watches" as Category, brand: "Seiko Style", name: "Alpinist Emerald Gold", price: 999, images: ["/src/assets/images/seiko_alpinist_green_1777619144101.png", "/src/assets/images/seiko_prospex_turtle_1777619127382.png"], description: "Internal compass bezel and signature green dial.", specs: ["38mm Case", "Leather Strap", "Sunburst Finish"], reviews: SAMPLE_REVIEWS },
-  { id: 8, category: "Watches" as Category, brand: "Seiko Style", name: "Presage Cocktail Moon", price: 999, images: ["/src/assets/images/seiko_presage_cocktail_1777619160466.png", "/src/assets/images/seiko_5_sports_stealth_1777619177377.png"], description: "Elegant radiating dial inspired by the Blue Moon cocktail.", specs: ["40mm Case", "Honed Indices", "Silver Case"], reviews: SAMPLE_REVIEWS },
-  { id: 9, category: "Watches" as Category, brand: "Seiko Style", name: "5 Sports Dark Stealth", price: 999, images: ["/src/assets/images/seiko_5_sports_stealth_1777619177377.png", "/src/assets/images/seiko_presage_cocktail_1777619160466.png"], description: "All-black tactical mod with a minimalist aesthetic.", specs: ["42mm Case", "PVD Finish", "Dark Grey Lume"], reviews: [SAMPLE_REVIEWS[0]] },
-  { id: 10, category: "Watches" as Category, brand: "Seiko Style", name: "King Seiko Heritage", price: 999, images: ["/src/assets/images/seiko_king_vintage_1777619196033.png", "/src/assets/images/seiko_alpinist_green_1777619144101.png"], description: "A sharp, vintage-inspired dress watch with angular lugs.", specs: ["37mm Case", "Linear Dial", "Classic Leather"], reviews: SAMPLE_REVIEWS },
+  { id: 1, category: "Watches" as Category, brand: "Rolex Style", name: "Datejust Ebony Mod", price: 999, images: ["/src/assets/images/rolex_classic_dark_1777619040163.png", "/src/assets/images/rolex_gold_daydate_1777619061428.png"], description: "Fluted bezel, Jubilee bracelet, precision automatic.", specs: ["41mm Case", "Sapphire Glass", "Date Display"] },
+  { id: 2, category: "Watches" as Category, brand: "Rolex Style", name: "Day-Date Presidential Gold", price: 999, images: ["/src/assets/images/rolex_gold_daydate_1777619061428.png", "/src/assets/images/rolex_classic_dark_1777619040163.png"], description: "Full gold finish, the peak of presidential luxury.", specs: ["36mm Case", "Gold-Plated Steel", "Day-Date Window"] },
+  { id: 3, category: "Watches" as Category, brand: "Rolex Style", name: "Submariner Hulk Edition", price: 999, images: ["/src/assets/images/rolex_submariner_hulk_1777619078004.png", "/src/assets/images/rolex_pepsi_gmt_1777619093643.png"], description: "Deep green sunburst dial with matching ceramic bezel.", specs: ["40mm Case", "Ceramic Insert", "Oyster Braclet"] },
+  { id: 4, category: "Watches" as Category, brand: "Rolex Style", name: "GMT Master II Pepsi", price: 999, images: ["/src/assets/images/rolex_pepsi_gmt_1777619093643.png", "/src/assets/images/rolex_submariner_hulk_1777619078004.png"], description: "Iconic red and blue bezel for the modern traveler.", specs: ["40mm Case", "Jubilee Band", "GMT Movement"] },
+  { id: 5, category: "Watches" as Category, brand: "Rolex Style", name: "Yacht-Master Oysterflex", price: 999, images: ["/src/assets/images/rolex_yacht_master_rose_1777619110502.png", "/src/assets/images/rolex_classic_dark_1777619040163.png"], description: "Rose gold luxury paired with a sporty matte black strap.", specs: ["40mm Case", "Matte Ceramic", "Flexible Strap"] },
+  { id: 6, category: "Watches" as Category, brand: "Seiko Style", name: "Prospex Turtle Stealth", price: 999, images: ["/src/assets/images/seiko_prospex_turtle_1777619127382.png", "/src/assets/images/seiko_alpinist_green_1777619144101.png"], description: "Rugged professional diver with the classic cushion case.", specs: ["44mm Case", "NH35 Automatic", "High Lume"] },
+  { id: 7, category: "Watches" as Category, brand: "Seiko Style", name: "Alpinist Emerald Gold", price: 999, images: ["/src/assets/images/seiko_alpinist_green_1777619144101.png", "/src/assets/images/seiko_prospex_turtle_1777619127382.png"], description: "Internal compass bezel and signature green dial.", specs: ["38mm Case", "Leather Strap", "Sunburst Finish"] },
+  { id: 8, category: "Watches" as Category, brand: "Seiko Style", name: "Presage Cocktail Moon", price: 999, images: ["/src/assets/images/seiko_presage_cocktail_1777619160466.png", "/src/assets/images/seiko_5_sports_stealth_1777619177377.png"], description: "Elegant radiating dial inspired by the Blue Moon cocktail.", specs: ["40mm Case", "Honed Indices", "Silver Case"] },
+  { id: 9, category: "Watches" as Category, brand: "Seiko Style", name: "5 Sports Dark Stealth", price: 999, images: ["/src/assets/images/seiko_5_sports_stealth_1777619177377.png", "/src/assets/images/seiko_presage_cocktail_1777619160466.png"], description: "All-black tactical mod with a minimalist aesthetic.", specs: ["42mm Case", "PVD Finish", "Dark Grey Lume"] },
+  { id: 10, category: "Watches" as Category, brand: "Seiko Style", name: "King Seiko Heritage", price: 999, images: ["/src/assets/images/seiko_king_vintage_1777619196033.png", "/src/assets/images/seiko_alpinist_green_1777619144101.png"], description: "A sharp, vintage-inspired dress watch with angular lugs.", specs: ["37mm Case", "Linear Dial", "Classic Leather"] },
   
   // SHOES
-  { id: 11, category: "Shoes" as Category, brand: "Honey's Elite", name: "Phantom Leather Sneakers", price: 999, images: ["/src/assets/images/luxury_sneakers_black_1777619390059.png", "/src/assets/images/luxury_sneakers_black_1777619390059.png"], description: "Handcrafted matte black leather for the ultimate minimal look.", specs: ["Calfskin Leather", "Italian Stitching"], reviews: SAMPLE_REVIEWS },
-  { id: 12, category: "Shoes" as Category, brand: "Honey's Elite", name: "Onyx Street Runner", price: 999, images: ["/src/assets/images/luxury_sneakers_black_1777619390059.png", "/src/assets/images/luxury_sneakers_black_1777619390059.png"], description: "Proprietary foam technology meeting high-end fashion design.", specs: ["Comfort Insole", "Breathable Mesh"], reviews: SAMPLE_REVIEWS },
-  { id: 13, category: "Shoes" as Category, brand: "Honey's Elite", name: "Stealth Hi-Top", price: 999, images: ["/src/assets/images/luxury_sneakers_black_1777619390059.png", "/src/assets/images/luxury_sneakers_black_1777619390059.png"], description: "The iconic hi-top silhouette redefined in premium materials.", specs: ["Premium Suede", "Ankle Support"], reviews: SAMPLE_REVIEWS },
+  { id: 11, category: "Shoes" as Category, brand: "Honey's Elite", name: "Phantom Leather Sneakers", price: 999, images: ["/src/assets/images/luxury_sneakers_black_1777619390059.png", "/src/assets/images/luxury_sneakers_black_1777619390059.png"], description: "Handcrafted matte black leather for the ultimate minimal look.", specs: ["Calfskin Leather", "Italian Stitching"] },
+  { id: 12, category: "Shoes" as Category, brand: "Honey's Elite", name: "Onyx Street Runner", price: 999, images: ["/src/assets/images/luxury_sneakers_black_1777619390059.png", "/src/assets/images/luxury_sneakers_black_1777619390059.png"], description: "Proprietary foam technology meeting high-end fashion design.", specs: ["Comfort Insole", "Breathable Mesh"] },
+  { id: 13, category: "Shoes" as Category, brand: "Honey's Elite", name: "Stealth Hi-Top", price: 999, images: ["/src/assets/images/luxury_sneakers_black_1777619390059.png", "/src/assets/images/luxury_sneakers_black_1777619390059.png"], description: "The iconic hi-top silhouette redefined in premium materials.", specs: ["Premium Suede", "Ankle Support"] },
   
   // JEANS
-  { id: 14, category: "Baggy Jeans" as Category, brand: "Urban Mood", name: "Midnight Baggy Denim", price: 999, images: ["/src/assets/images/baggy_jeans_dark_1777619408317.png", "/src/assets/images/baggy_jeans_dark_1777619408317.png"], description: "Perfectly oversized with a structured architecture.", specs: ["14oz Denim", "Deep Charcoal Wash"], reviews: SAMPLE_REVIEWS },
-  { id: 15, category: "Baggy Jeans" as Category, brand: "Urban Mood", name: "Washed Slate Oversized", price: 999, images: ["/src/assets/images/baggy_jeans_dark_1777619408317.png", "/src/assets/images/baggy_jeans_dark_1777619408317.png"], description: "A relaxed drape that defines the modern streetwear look.", specs: ["Relaxed Taper", "Reinforced Hem"], reviews: SAMPLE_REVIEWS },
-  { id: 16, category: "Baggy Jeans" as Category, brand: "Urban Mood", name: "Tactical Denim Baggy", price: 999, images: ["/src/assets/images/baggy_jeans_dark_1777619408317.png", "/src/assets/images/baggy_jeans_dark_1777619408317.png"], description: "Combining utility aesthetics with classic baggy fits.", specs: ["Multi-pocket", "YKK Hardware"], reviews: SAMPLE_REVIEWS },
+  { id: 14, category: "Baggy Jeans" as Category, brand: "Urban Mood", name: "Midnight Baggy Denim", price: 999, images: ["/src/assets/images/baggy_jeans_dark_1777619408317.png", "/src/assets/images/baggy_jeans_dark_1777619408317.png"], description: "Perfectly oversized with a structured architecture.", specs: ["14oz Denim", "Deep Charcoal Wash"] },
+  { id: 15, category: "Baggy Jeans" as Category, brand: "Urban Mood", name: "Washed Slate Oversized", price: 999, images: ["/src/assets/images/baggy_jeans_dark_1777619408317.png", "/src/assets/images/baggy_jeans_dark_1777619408317.png"], description: "A relaxed drape that defines the modern streetwear look.", specs: ["Relaxed Taper", "Reinforced Hem"] },
+  { id: 16, category: "Baggy Jeans" as Category, brand: "Urban Mood", name: "Tactical Denim Baggy", price: 999, images: ["/src/assets/images/baggy_jeans_dark_1777619408317.png", "/src/assets/images/baggy_jeans_dark_1777619408317.png"], description: "Combining utility aesthetics with classic baggy fits.", specs: ["Multi-pocket", "YKK Hardware"] },
 
   // OUTFITS
-  { id: 17, category: "Aesthetic Outfits" as Category, brand: "Honeys Design", name: "Shadowbox Hoodie Set", price: 999, images: ["/src/assets/images/aesthetic_outfit_mood_1777619427376.png", "/src/assets/images/aesthetic_outfit_mood_1777619427376.png"], description: "The full dark ensemble: Oversized hoodie and tech cargos.", specs: ["Heavyweight Cotton", "Relaxed Fit"], reviews: SAMPLE_REVIEWS },
-  { id: 18, category: "Aesthetic Outfits" as Category, brand: "Honeys Design", name: "Minimalist Lounge Ensemble", price: 999, images: ["/src/assets/images/aesthetic_outfit_mood_1777619427376.png", "/src/assets/images/aesthetic_outfit_mood_1777619427376.png"], description: "Luxury loungewear designed for high-end aesthetic comfort.", specs: ["Silk-touch Fabric", "Clean Silhouettes"], reviews: SAMPLE_REVIEWS }
+  { id: 17, category: "Aesthetic Outfits" as Category, brand: "Honeys Design", name: "Shadowbox Hoodie Set", price: 999, images: ["/src/assets/images/aesthetic_outfit_mood_1777619427376.png", "/src/assets/images/aesthetic_outfit_mood_1777619427376.png"], description: "The full dark ensemble: Oversized hoodie and tech cargos.", specs: ["Heavyweight Cotton", "Relaxed Fit"] },
+  { id: 18, category: "Aesthetic Outfits" as Category, brand: "Honeys Design", name: "Minimalist Lounge Ensemble", price: 999, images: ["/src/assets/images/aesthetic_outfit_mood_1777619427376.png", "/src/assets/images/aesthetic_outfit_mood_1777619427376.png"], description: "Luxury loungewear designed for high-end aesthetic comfort.", specs: ["Silk-touch Fabric", "Clean Silhouettes"] }
 ];
 
 export default function App() {
@@ -92,40 +79,21 @@ export default function App() {
   const [checkoutStep, setCheckoutStep] = useState<"detail" | "shipping" | "payment">("detail");
   const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
   const [formData, setFormData] = useState({ name: "", number: "", address: "" });
-  const [newReview, setNewReview] = useState({ rating: 5, comment: "" });
-  const [reviewsByProduct, setReviewsByProduct] = useState<Record<number, Review[]>>({});
 
   useEffect(() => {
-    // Initialize reviews local state
-    const initialReviews: Record<number, Review[]> = {};
-    PRODUCTS.forEach(p => {
-      initialReviews[p.id] = p.reviews;
-    });
-    setReviewsByProduct(initialReviews);
-  }, []);
+    if (showCheckout || isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [showCheckout, isMenuOpen]);
 
   const handleNextStep = (e: FormEvent) => {
     e.preventDefault();
     setCheckoutStep("payment");
-  };
-
-  const handleAddReview = (e: FormEvent) => {
-    e.preventDefault();
-    if (!selectedProduct) return;
-    
-    const review: Review = {
-      id: Date.now(),
-      author: "Verified Guest",
-      rating: newReview.rating,
-      comment: newReview.comment,
-      date: "Just now"
-    };
-
-    setReviewsByProduct(prev => ({
-      ...prev,
-      [selectedProduct.id]: [review, ...(prev[selectedProduct.id] || [])]
-    }));
-    setNewReview({ rating: 5, comment: "" });
   };
 
   useEffect(() => {
@@ -365,19 +333,24 @@ export default function App() {
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12 overflow-y-auto">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => { if(!isSuccess) setShowCheckout(false); }} className="fixed inset-0 bg-black/98 backdrop-blur-3xl" />
             
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} className="relative w-full max-w-6xl bg-rich-black border border-white/10 rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-[0_0_150px_rgba(212,175,55,0.05)]">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }} 
+              animate={{ opacity: 1, scale: 1 }} 
+              exit={{ opacity: 0, scale: 0.9 }} 
+              className="relative w-full max-w-6xl bg-rich-black border border-white/10 rounded-[2rem] md:rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-[0_0_150px_rgba(212,175,55,0.05)] max-h-[90vh]"
+            >
               {isSuccess ? (
-                <div className="w-full py-32 px-16 text-center flex flex-col items-center justify-center bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
-                  <CheckCircle2 className="w-24 h-24 text-gold mb-12 animate-bounce" />
-                  <h2 className="text-5xl md:text-7xl font-display font-black mb-8 italic tracking-tighter">ORDER SECURED.</h2>
-                  <p className="text-zinc-500 text-xl max-w-xl mb-16 leading-relaxed">Congrats <span className="text-white font-bold">{formData.name}</span>! Your <span className="text-gold font-bold">{selectedProduct.name}</span> has been secured. Our team will dispatch it today. Expect delivery in 2-3 days.</p>
-                  <button onClick={() => { setShowCheckout(false); setIsSuccess(false); setFormData({name: "", number: "", address: ""}); }} className="bg-white text-black px-16 py-5 rounded-full font-black uppercase tracking-widest transition-all hover:bg-gold hover:scale-105 active:scale-95 shadow-xl">Return To Store</button>
+                <div className="w-full py-20 md:py-32 px-8 md:px-16 text-center flex flex-col items-center justify-center bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] overflow-y-auto">
+                  <CheckCircle2 className="w-16 h-16 md:w-24 md:h-24 text-gold mb-8 md:mb-12 animate-bounce" />
+                  <h2 className="text-4xl md:text-7xl font-display font-black mb-6 md:mb-8 italic tracking-tighter">ORDER SECURED.</h2>
+                  <p className="text-zinc-500 text-base md:text-xl max-w-xl mb-10 md:mb-16 leading-relaxed">Congrats <span className="text-white font-bold">{formData.name}</span>! Your <span className="text-gold font-bold">{selectedProduct.name}</span> has been secured. Our team will dispatch it today. Expect delivery in 2-3 days.</p>
+                  <button onClick={() => { setShowCheckout(false); setIsSuccess(false); setFormData({name: "", number: "", address: ""}); }} className="bg-white text-black px-12 md:px-16 py-4 md:py-5 rounded-full font-black uppercase tracking-widest transition-all hover:bg-gold hover:scale-105 active:scale-95 shadow-xl text-xs">Return To Store</button>
                 </div>
               ) : (
-                <div className="flex flex-col md:flex-row w-full max-h-[95vh] overflow-hidden">
+                <div className="flex flex-col md:flex-row w-full overflow-hidden">
                   {/* Sidebar - Detailed Order Summary / Detail Gallery */}
-                  <div className="w-full md:w-5/12 p-8 md:p-12 bg-charcoal/20 border-r border-white/5 flex flex-col shadow-2xl">
-                    <div className="mb-8">
+                  <div className="w-full md:w-5/12 p-6 md:p-12 bg-charcoal/20 border-b md:border-b-0 md:border-r border-white/5 flex flex-col shadow-2xl overflow-y-auto max-h-[40vh] md:max-h-full">
+                    <div className="mb-6 md:mb-8">
                       <span className="text-[10px] text-zinc-500 uppercase tracking-[0.4em] font-black italic block mb-4">
                         {checkoutStep === "detail" ? "Product View" : "Selection Summary"}
                       </span>
@@ -448,31 +421,31 @@ export default function App() {
                   </div>
 
                   {/* Main Content Area */}
-                  <div className="w-full md:w-7/12 p-8 md:p-12 overflow-y-auto custom-scrollbar bg-rich-black flex flex-col">
-                    <div className="flex justify-between items-start mb-12">
-                      <div className="space-y-6">
-                        <h3 className="text-2xl font-display font-black italic tracking-tighter">
-                          {checkoutStep === "detail" ? "SPECIFICATIONS & REVIEWS" : "GUEST CHECKOUT"}
+                  <div className="w-full md:w-7/12 p-6 md:p-12 overflow-y-auto bg-rich-black flex flex-col min-h-[50vh] md:min-h-0">
+                    <div className="flex justify-between items-start mb-8 md:mb-12">
+                      <div className="space-y-4 md:space-y-6">
+                        <h3 className="text-xl md:text-2xl font-display font-black italic tracking-tighter">
+                          {checkoutStep === "detail" ? "SPECIFICATIONS" : "CHECKOUT"}
                         </h3>
                         {/* Progress Stepper */}
-                        <div className="flex items-center gap-4">
-                          <div className={`flex items-center gap-2 text-[8px] uppercase tracking-[0.15em] font-black transition-all ${checkoutStep === "detail" ? "text-gold" : "text-zinc-600"}`}>
-                            <span className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${checkoutStep === "detail" ? "border-gold bg-gold/10" : "border-zinc-800"}`}>1</span>
+                        <div className="flex items-center gap-2 md:gap-4 overflow-x-auto no-scrollbar">
+                          <div className={`flex items-center gap-2 text-[7px] md:text-[8px] uppercase tracking-[0.15em] font-black transition-all ${checkoutStep === "detail" ? "text-gold" : "text-zinc-600"}`}>
+                            <span className={`w-4 h-4 md:w-5 md:h-5 rounded-full border-2 flex items-center justify-center transition-all ${checkoutStep === "detail" ? "border-gold bg-gold/10" : "border-zinc-800"}`}>1</span>
                             Detail
                           </div>
-                          <div className="w-8 h-[1px] bg-zinc-800" />
-                          <div className={`flex items-center gap-2 text-[8px] uppercase tracking-[0.15em] font-black transition-all ${checkoutStep === "shipping" ? "text-gold" : "text-zinc-600"}`}>
-                            <span className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${checkoutStep === "shipping" ? "border-gold bg-gold/10" : "border-zinc-800"}`}>2</span>
+                          <div className="w-4 md:w-8 h-[1px] bg-zinc-800" />
+                          <div className={`flex items-center gap-2 text-[7px] md:text-[8px] uppercase tracking-[0.15em] font-black transition-all ${checkoutStep === "shipping" ? "text-gold" : "text-zinc-600"}`}>
+                            <span className={`w-4 h-4 md:w-5 md:h-5 rounded-full border-2 flex items-center justify-center transition-all ${checkoutStep === "shipping" ? "border-gold bg-gold/10" : "border-zinc-800"}`}>2</span>
                             Shipping
                           </div>
-                          <div className="w-8 h-[1px] bg-zinc-800" />
-                          <div className={`flex items-center gap-2 text-[8px] uppercase tracking-[0.15em] font-black transition-all ${checkoutStep === "payment" ? "text-gold" : "text-zinc-600"}`}>
-                            <span className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${checkoutStep === "payment" ? "border-gold bg-gold/10" : "border-zinc-800"}`}>3</span>
+                          <div className="w-4 md:w-8 h-[1px] bg-zinc-800" />
+                          <div className={`flex items-center gap-2 text-[7px] md:text-[8px] uppercase tracking-[0.15em] font-black transition-all ${checkoutStep === "payment" ? "text-gold" : "text-zinc-600"}`}>
+                            <span className={`w-4 h-4 md:w-5 md:h-5 rounded-full border-2 flex items-center justify-center transition-all ${checkoutStep === "payment" ? "border-gold bg-gold/10" : "border-zinc-800"}`}>3</span>
                             Payment
                           </div>
                         </div>
                       </div>
-                      <button onClick={() => setShowCheckout(false)} className="group p-2 hover:bg-white/5 rounded-full transition-all"><X className="w-8 h-8 text-zinc-500 group-hover:text-white group-hover:rotate-90 transition-all duration-500" /></button>
+                      <button onClick={() => setShowCheckout(false)} className="group p-2 hover:bg-white/5 rounded-full transition-all"><X className="w-6 h-6 md:w-8 md:h-8 text-zinc-500 group-hover:text-white group-hover:rotate-90 transition-all duration-500" /></button>
                     </div>
 
                     <AnimatePresence mode="wait">
@@ -482,71 +455,29 @@ export default function App() {
                           initial={{ opacity: 0, y: 15 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -15 }}
-                          className="flex flex-col flex-1 space-y-12"
+                          className="flex flex-col flex-1 space-y-8 md:space-y-12"
                         >
-                          <div className="space-y-10">
-                            {/* Reviews Integration within Detail View */}
-                            <div className="space-y-8">
-                              <div className="flex items-center justify-between border-b border-white/5 pb-4">
-                                <h4 className="text-sm font-black uppercase tracking-[0.3em] italic">Customer Voice</h4>
-                                <div className="flex gap-1">
-                                  {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-3 h-3 fill-gold text-gold" />)}
-                                </div>
+                          <div className="space-y-8 md:space-y-10">
+                            {/* Specifications listed in sidebar summary already, but we can add more info here if needed */}
+                            <div className="space-y-6">
+                              <h4 className="text-[10px] md:text-sm font-black uppercase tracking-[0.3em] italic text-gold">Authenticity Guaranteed</h4>
+                              <p className="text-zinc-500 text-xs md:text-sm leading-relaxed">Each piece in our collection undergoes a rigorous multi-point inspection to ensure absolute precision and quality. We source only the finest materials for our tactical and minimalist designs.</p>
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                              <div className="bg-white/5 p-4 rounded-xl border border-white/5">
+                                <span className="block text-[8px] text-zinc-500 uppercase tracking-widest mb-1">Quality Control</span>
+                                <span className="text-[10px] text-white font-bold">Passed</span>
                               </div>
-
-                              <div className="space-y-6 max-h-[250px] overflow-y-auto pr-4 custom-scrollbar">
-                                {(reviewsByProduct[selectedProduct.id] || []).length > 0 ? (
-                                  (reviewsByProduct[selectedProduct.id] || []).map(r => (
-                                    <div key={r.id} className="space-y-2 border-l-2 border-gold/20 pl-6">
-                                      <div className="flex items-center gap-4">
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-white">{r.author}</span>
-                                        <div className="flex gap-0.5">
-                                          {[...Array(5)].map((_, i) => (
-                                            <Star key={i} className={`w-2 h-2 ${i < r.rating ? "fill-gold text-gold" : "text-zinc-800"}`} />
-                                          ))}
-                                        </div>
-                                        <span className="text-[8px] text-zinc-600 uppercase font-bold">{r.date}</span>
-                                      </div>
-                                      <p className="text-zinc-400 text-xs italic">"{r.comment}"</p>
-                                    </div>
-                                  ))
-                                ) : (
-                                  <p className="text-zinc-600 text-[10px] italic uppercase tracking-widest">Be the first to share your thoughts.</p>
-                                )}
+                              <div className="bg-white/5 p-4 rounded-xl border border-white/5">
+                                <span className="block text-[8px] text-zinc-500 uppercase tracking-widest mb-1">Warranty</span>
+                                <span className="text-[10px] text-white font-bold">6 Months</span>
                               </div>
-
-                              <form onSubmit={handleAddReview} className="bg-white/5 p-5 rounded-2xl border border-white/5 space-y-4">
-                                <p className="text-[9px] font-black uppercase tracking-widest text-gold italic">Submit Review</p>
-                                <div className="flex gap-4 items-center">
-                                  <div className="flex gap-1">
-                                    {[1, 2, 3, 4, 5].map(s => (
-                                      <button 
-                                        key={s} 
-                                        type="button"
-                                        onClick={() => setNewReview({...newReview, rating: s})}
-                                        className="hover:scale-125 transition-transform"
-                                      >
-                                        <Star className={`w-4 h-4 ${s <= newReview.rating ? "fill-gold text-gold" : "text-zinc-700"}`} />
-                                      </button>
-                                    ))}
-                                  </div>
-                                  <input 
-                                    required
-                                    type="text" 
-                                    placeholder="Express your aesthetic..." 
-                                    className="flex-1 bg-transparent border-b border-white/10 py-2 text-xs outline-none focus:border-gold transition-colors"
-                                    value={newReview.comment}
-                                    onChange={e => setNewReview({...newReview, comment: e.target.value})}
-                                  />
-                                  <button type="submit" className="bg-gold text-black px-4 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-white transition-colors">Post</button>
-                                </div>
-                              </form>
                             </div>
                           </div>
 
                           <button 
                             onClick={() => setCheckoutStep("shipping")}
-                            className="bg-white text-black py-5 rounded-full font-black uppercase tracking-[0.2em] hover:bg-gold transition-all duration-500 shadow-2xl mt-auto text-xs"
+                            className="bg-white text-black py-4 md:py-5 rounded-full font-black uppercase tracking-[0.2em] hover:bg-gold transition-all duration-500 shadow-2xl mt-auto text-[10px] md:text-xs"
                           >
                             Acquire Now • ₹999
                           </button>
@@ -554,30 +485,30 @@ export default function App() {
                       ) : checkoutStep === "shipping" ? (
                         <motion.div 
                           key="shipping-step"
-                          initial={{ opacity: 0, y: 15 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -15 }}
-                          className="space-y-12 flex-1"
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -20 }}
+                          className="space-y-8 md:space-y-12 flex-1"
                         >
-                          <form onSubmit={handleNextStep} className="space-y-8">
-                            <div className="space-y-4">
-                              <label className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] flex items-center gap-3 italic"><User className="w-4 h-4 text-gold" /> Consignee Name</label>
-                              <input required type="text" placeholder="FULL NAME" className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 focus:border-gold outline-none transition-all placeholder:text-zinc-800 font-bold" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
+                          <form onSubmit={handleNextStep} className="space-y-6 md:space-y-8">
+                            <div className="space-y-3 md:space-y-4">
+                              <label className="text-[9px] md:text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] flex items-center gap-3 italic"><User className="w-3 md:w-4 h-3 md:h-4 text-gold" /> Consignee Name</label>
+                              <input required type="text" placeholder="FULL NAME" className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 md:p-5 focus:border-gold outline-none transition-all placeholder:text-zinc-800 font-bold text-sm" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
                             </div>
-                            <div className="space-y-4">
-                              <label className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] flex items-center gap-3 italic"><Phone className="text-gold w-4 h-4" /> Contact Number</label>
-                              <input required type="tel" placeholder="10-DIGIT MOBILE" className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 focus:border-gold outline-none transition-all placeholder:text-zinc-800 font-bold" value={formData.number} onChange={e => setFormData({...formData, number: e.target.value})} />
+                            <div className="space-y-3 md:space-y-4">
+                              <label className="text-[9px] md:text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] flex items-center gap-3 italic"><Phone className="text-gold w-3 md:w-4 h-3 md:h-4" /> Contact Number</label>
+                              <input required type="tel" placeholder="10-DIGIT MOBILE" className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 md:p-5 focus:border-gold outline-none transition-all placeholder:text-zinc-800 font-bold text-sm" value={formData.number} onChange={e => setFormData({...formData, number: e.target.value})} />
                             </div>
-                            <div className="space-y-4">
-                              <label className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] flex items-center gap-3 italic"><MapPin className="w-4 h-4 text-gold" /> Shipping Address</label>
-                              <textarea required rows={3} placeholder="COMPLETE ADDRESS WITH PINCODE" className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 focus:border-gold outline-none transition-all placeholder:text-zinc-800 font-bold resize-none" value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} />
+                            <div className="space-y-3 md:space-y-4">
+                              <label className="text-[9px] md:text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] flex items-center gap-3 italic"><MapPin className="w-3 md:w-4 h-3 md:h-4 text-gold" /> Shipping Address</label>
+                              <textarea required rows={3} placeholder="COMPLETE ADDRESS WITH PINCODE" className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 md:p-5 focus:border-gold outline-none transition-all placeholder:text-zinc-800 font-bold resize-none text-sm" value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} />
                             </div>
                             
                             <div className="flex gap-4">
                               <button type="button" onClick={() => setCheckoutStep("detail")} className="w-1/4 border border-white/10 rounded-full text-zinc-500 hover:text-white transition-colors">
-                                <ChevronLeft className="w-6 h-6 mx-auto" />
+                                <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 mx-auto" />
                               </button>
-                              <button type="submit" className="flex-1 bg-white text-black py-5 rounded-full font-black uppercase tracking-[0.2em] hover:bg-gold transition-all duration-500 shadow-2xl text-xs">
+                              <button type="submit" className="flex-1 bg-white text-black py-4 md:py-5 rounded-full font-black uppercase tracking-[0.2em] hover:bg-gold transition-all duration-500 shadow-2xl text-[10px] md:text-xs">
                                 Proceed to Payment
                               </button>
                             </div>
@@ -586,36 +517,43 @@ export default function App() {
                       ) : (
                         <motion.div 
                           key="payment-step"
-                          initial={{ opacity: 0, y: 15 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -15 }}
-                          className="flex flex-col flex-1 space-y-10"
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -20 }}
+                          className="flex flex-col flex-1 space-y-8 md:space-y-10"
                         >
                           <div className="flex items-center justify-between">
-                            <button onClick={() => setCheckoutStep("shipping")} className="text-[10px] text-zinc-500 uppercase tracking-widest font-black hover:text-white flex items-center gap-2 transition-colors">
-                              <ChevronLeft className="w-4 h-4" /> Logistics Adjust
+                            <button onClick={() => setCheckoutStep("shipping")} className="text-[8px] md:text-[10px] text-zinc-500 uppercase tracking-widest font-black hover:text-white flex items-center gap-2 transition-colors">
+                              <ChevronLeft className="w-3 md:w-4 h-3 md:h-4" /> Logistics Adjust
                             </button>
-                            <div className="text-[9px] text-gold uppercase tracking-[0.4em] font-black italic">UPI Protocol Active</div>
+                            <div className="text-[8px] md:text-[9px] text-gold uppercase tracking-[0.4em] font-black italic">UPI Protocol Active</div>
                           </div>
 
-                          <div className="p-12 bg-white/5 border-2 border-gold/40 rounded-[3rem] flex flex-col items-center text-center space-y-10 relative shadow-2xl">
+                          <div className="p-8 md:p-12 bg-white/5 border-2 border-gold/40 rounded-[2rem] md:rounded-[3rem] flex flex-col items-center text-center space-y-8 md:space-y-10 relative shadow-2xl">
                             <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent" />
                             
-                            <div className="space-y-3">
-                              <h4 className="text-3xl font-display font-black italic tracking-widest text-white uppercase">Scan & Secure</h4>
-                              <p className="text-[10px] text-zinc-500 font-black uppercase tracking-[0.4em]">UPI TARGET: ansumanverma@fam</p>
+                            <div className="space-y-2 md:space-y-3">
+                              <h4 className="text-2xl md:text-3xl font-display font-black italic tracking-widest text-white uppercase">Scan & Secure</h4>
+                              <p className="text-[8px] md:text-[10px] text-zinc-500 font-black uppercase tracking-[0.4em]">UPI TARGET: ansumanverma@fam</p>
                             </div>
 
                             <div className="relative">
-                              <div className="absolute -inset-10 bg-gold/10 blur-3xl rounded-full opacity-40 animate-pulse" />
-                              <img src={QR_CODE} alt="UPI QR" className="relative w-56 h-56 p-6 bg-[#fde7cf] rounded-[2rem] shadow-[0_0_50px_rgba(255,255,255,0.05)] border-4 border-gold/10" />
+                              <div className="absolute -inset-6 md:-inset-10 bg-gold/10 blur-3xl rounded-full opacity-40 animate-pulse" />
+                              <img src={QR_CODE} alt="UPI QR" className="relative w-48 h-48 md:w-56 md:h-56 p-4 md:p-6 bg-[#fde7cf] rounded-[1.5rem] md:rounded-[2rem] shadow-[0_0_50px_rgba(255,255,255,0.05)] border-4 border-gold/10" />
                             </div>
 
                             <div className="space-y-4 max-w-sm">
-                              <p className="text-[11px] text-zinc-400 font-bold uppercase tracking-[0.15em] leading-relaxed italic animate-pulse">
+                              <p className="text-[10px] md:text-[11px] text-zinc-400 font-bold uppercase tracking-[0.15em] leading-relaxed italic animate-pulse">
                                 Awaiting payment confirmation...
                               </p>
                             </div>
+
+                            <button 
+                              onClick={() => setIsSuccess(true)}
+                              className="w-full bg-gold text-black py-4 md:py-6 rounded-full font-black uppercase tracking-[0.2em] hover:bg-white transition-all duration-500 shadow-2xl transform active:scale-95 text-[10px] md:text-xs"
+                            >
+                              I Have Paid • ₹999
+                            </button>
                           </div>
                         </motion.div>
                       )}
