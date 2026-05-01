@@ -27,7 +27,7 @@ import {
 // Image constants
 const HERO_IMAGES = [
   "/src/assets/images/rolex_gold_daydate_1777619061428.png",
-  "/src/assets/images/seiko_prospex_turtle_1777619127382.png",
+  "/src/assets/images/seiko_new_luxury.png",
   "/src/assets/images/luxury_sneakers_black_1777619390059.png",
   "/src/assets/images/baggy_jeans_dark_1777619408317.png",
   "/src/assets/images/aesthetic_outfit_mood_1777619427376.png"
@@ -51,6 +51,7 @@ const PRODUCTS = [
   { id: 8, category: "Watches" as Category, brand: "Seiko Style", name: "Presage Cocktail Moon", price: 999, images: ["/src/assets/images/seiko_presage_cocktail_1777619160466.png", "/src/assets/images/seiko_5_sports_stealth_1777619177377.png"], description: "Elegant radiating dial inspired by the Blue Moon cocktail.", specs: ["40mm Case", "Honed Indices", "Silver Case"] },
   { id: 9, category: "Watches" as Category, brand: "Seiko Style", name: "5 Sports Dark Stealth", price: 999, images: ["/src/assets/images/seiko_5_sports_stealth_1777619177377.png", "/src/assets/images/seiko_presage_cocktail_1777619160466.png"], description: "All-black tactical mod with a minimalist aesthetic.", specs: ["42mm Case", "PVD Finish", "Dark Grey Lume"] },
   { id: 10, category: "Watches" as Category, brand: "Seiko Style", name: "King Seiko Heritage", price: 999, images: ["/src/assets/images/seiko_king_vintage_1777619196033.png", "/src/assets/images/seiko_alpinist_green_1777619144101.png"], description: "A sharp, vintage-inspired dress watch with angular lugs.", specs: ["37mm Case", "Linear Dial", "Classic Leather"] },
+  { id: 20, category: "Watches" as Category, brand: "Seiko Style", name: "Seiko Mod 'Grand' Edition", price: 999, images: ["/src/assets/images/seiko_new_luxury.png", "/src/assets/images/seiko_king_vintage_1777619196033.png"], description: "Premium sunburst dial with high-polish indices and precision modded movement.", specs: ["40mm Case", "Grand Style Dial", "Stainless Steel"] },
   
   // SHOES
   { id: 11, category: "Shoes" as Category, brand: "Honey's Elite", name: "Phantom Leather Sneakers", price: 999, images: ["/src/assets/images/luxury_sneakers_black_1777619390059.png", "/src/assets/images/luxury_sneakers_black_1777619390059.png"], description: "Handcrafted matte black leather for the ultimate minimal look.", specs: ["Calfskin Leather", "Italian Stitching"] },
@@ -202,13 +203,14 @@ export default function App() {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeSlide}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5 }}
+            initial={{ opacity: 0, scale: 1.2, rotateX: 20 }}
+            animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+            exit={{ opacity: 0, scale: 0.9, rotateX: -20 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="absolute inset-0 z-0"
+            style={{ perspective: "2000px" }}
           >
-            <img src={HERO_IMAGES[activeSlide]} alt="Luxury Banner" className="w-full h-full object-cover opacity-60 scale-110" />
+            <img src={HERO_IMAGES[activeSlide]} alt="Luxury Banner" className="w-full h-full object-cover opacity-60" />
             <div className="absolute inset-0 bg-gradient-to-b from-rich-black/40 via-transparent to-rich-black" />
           </motion.div>
         </AnimatePresence>
@@ -288,15 +290,25 @@ export default function App() {
               <motion.div 
                 layout 
                 key={product.id} 
-                initial={{ opacity: 0 }} 
-                whileInView={{ opacity: 1 }} 
+                initial={{ opacity: 0, y: 30 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                whileHover={{ 
+                  y: -10,
+                  transition: { duration: 0.3 }
+                }}
                 transition={{ duration: 0.8 }} 
-                className="group cursor-pointer"
+                className="group cursor-pointer perspective-1000"
                 onClick={() => handleBuyNow(product)}
               >
-                <div className="relative aspect-[1/1] overflow-hidden bg-white/5 rounded-3xl mb-10 border border-white/10 shadow-2xl backdrop-blur-sm">
-                  <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-rich-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="relative aspect-[1/1] overflow-hidden bg-white/5 rounded-3xl mb-10 border border-white/10 shadow-2xl backdrop-blur-sm transition-all duration-500 group-hover:shadow-gold/10 group-hover:border-gold/30">
+                  <motion.div 
+                    className="w-full h-full"
+                    whileHover={{ rotateY: 15, rotateX: -5, scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover" />
+                  </motion.div>
+                  <div className="absolute inset-0 bg-rich-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
                     <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/50 italic">View Details</span>
                   </div>
                   <div className="absolute top-6 left-6 bg-rich-black/80 backdrop-blur-xl px-5 py-2 rounded-full border border-white/10 text-[9px] font-black uppercase tracking-[0.2em] italic">
